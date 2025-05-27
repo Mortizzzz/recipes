@@ -1,0 +1,9 @@
+name: MyServer
+description: Egy példa FiveM szerver template
+tasks:
+  - action: install_git
+    repo: https://github.com/citizenfx/cfx-server-data
+    ref: master
+    dest: ./resources/[cfx-default]
+  - action: set_license
+  - action: set_endpoint
