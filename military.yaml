@@ -55,71 +55,9 @@ tasks:
   ## Download esx-addons
 
   - action: download_github
-    src: https://github.com/esx-framework/esx_addoninventory
+    src: https://github.com/esx-framework/ESX-Legacy-Addons/
     ref: main
-    dest: ./tmp/addons/esx_addoninventory
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_datastore
-    ref: main
-    dest: ./tmp/addons/esx_datastore
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_service
-    ref: main
-    dest: ./tmp/addons/esx_service
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_rpchat
-    ref: main
-    dest: ./tmp/addons/esx_rpchat
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_basicneeds
-    ref: main
-    dest: ./tmp/addons/esx_basicneeds
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_optionalneeds
-    ref: main
-    dest: ./tmp/addons/esx_optionalneeds
-
-  - action: waste_time # prevent github throttling
-    seconds: 5
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_property
-    ref: main
-    dest: ./tmp/addons/esx_property
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_vehicleshop
-    ref: main
-    dest: ./tmp/addons/esx_vehicleshop
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_society
-    ref: main
-    dest: ./tmp/addons/esx_society
-
-  - action: waste_time # prevent github throttling
-    seconds: 5
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_license
-    ref: main
-    dest: ./tmp/addons/esx_license
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_ambulancejob
-    ref: main
-    dest: ./tmp/addons/esx_ambulancejob
-
-  - action: download_github
-    src: https://github.com/esx-framework/esx_status
-    ref: main
-    dest: ./tmp/addons/esx_status
-
+    dest: ./tmp/addons
 
   - action: move_path
     src: ./tmp/addons/
