@@ -1,9 +1,208 @@
-name: MyServer
-description: Egy példa FiveM szerver template
+$engine: 3
+$minFxVersion: 13165
+$onesync: on
+name: military_template
+version: 1.0.0
+author: Mortizz.
+description: Military szerver template
+
 tasks:
-  - action: install_git
-    repo: https://github.com/citizenfx/cfx-server-data
+  ## Download default CFX resources
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
     ref: master
+    subpath: resources
     dest: ./resources/[cfx-default]
-  - action: set_license
-  - action: set_endpoint
+
+  ## bob74_ipl
+  - action: download_github
+    src: https://github.com/Bob74/bob74_ipl
+    ref: master
+    dest: ./resources/bob74_ipl
+
+  - action: download_github
+    src: https://github.com/Mortizzzz/recipes
+    ref: main
+    dest: ./tmp/recipe
+
+  - action: move_path
+    src: ./tmp/recipe/server.cfg
+    dest: ./server.cfg
+
+  - action: connect_database
+
+  ## Download esx core
+  - action: download_github
+    src: https://github.com/esx-framework/esx-core
+    ref: main
+    dest: ./tmp/core
+
+  - action: move_path
+    src: ./tmp/core/[core]
+    dest: ./resources/[core]
+
+  - action: remove_path
+    path: ./resources/[core]/esx_multicharacter
+
+  - action: replace_string
+    file: ./resources/[core]/es_extended/shared/config/main.lua
+    search: 'Config.CustomInventory = false'
+    replace: 'Config.CustomInventory = "ox"'
+
+  - action: query_database
+    file: ./tmp/core/[SQL]/legacy.sql
+
+  ## Download esx-addons
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_addonaccount
+    ref: main
+    dest: ./tmp/addons/esx_addonaccount
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_addoninventory
+    ref: main
+    dest: ./tmp/addons/esx_addoninventory
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_datastore
+    ref: main
+    dest: ./tmp/addons/esx_datastore
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_service
+    ref: main
+    dest: ./tmp/addons/esx_service
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_rpchat
+    ref: main
+    dest: ./tmp/addons/esx_rpchat
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_basicneeds
+    ref: main
+    dest: ./tmp/addons/esx_basicneeds
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_optionalneeds
+    ref: main
+    dest: ./tmp/addons/esx_optionalneeds
+
+  - action: waste_time # prevent github throttling
+    seconds: 5
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_property
+    ref: main
+    dest: ./tmp/addons/esx_property
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_vehicleshop
+    ref: main
+    dest: ./tmp/addons/esx_vehicleshop
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_society
+    ref: main
+    dest: ./tmp/addons/esx_society
+
+  - action: waste_time # prevent github throttling
+    seconds: 5
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_license
+    ref: main
+    dest: ./tmp/addons/esx_license
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_ambulancejob
+    ref: main
+    dest: ./tmp/addons/esx_ambulancejob
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_status
+    ref: main
+    dest: ./tmp/addons/esx_status
+
+
+  - action: move_path
+    src: ./tmp/addons/
+    dest: ./resources/[esx_addons]
+
+  ## oxmysql
+  - action: download_file
+    url: https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip
+    path: ./tmp/oxmysql.zip
+  - action: unzip
+    src: ./tmp/oxmysql.zip
+    dest: ./resources/[ox]
+
+  ## ox_inventory
+  - action: download_file
+    url: https://github.com/overextended/ox_inventory/releases/latest/download/ox_inventory.zip
+    path: ./tmp/ox_inventory.zip
+  - action: unzip
+    src: ./tmp/ox_inventory.zip
+    dest: ./resources/[ox]
+
+  ## ox_lib
+  - action: download_file
+    url: https://github.com/overextended/ox_lib/releases/latest/download/ox_lib.zip
+    path: ./tmp/ox_lib.zip
+
+  - action: unzip
+    src: ./tmp/ox_lib.zip
+    dest: ./resources/[ox]
+
+
+  ## appearance
+  - action: download_file
+    url: https://github.com/iLLeniumStudios/illenium-appearance/releases/latest/download/illenium-appearance.zip
+    path: ./tmp/illenium-appearance.zip
+  - action: unzip
+    src: ./tmp/illenium-appearance.zip
+    dest: ./resources
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/management_outfits.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/player_outfit_codes.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/player_outfits.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/playerskins.sql
+
+
+  ## pma-voice
+  - action: download_github
+    src: https://github.com/AvarianKnight/pma-voice
+    ref: main
+    dest: ./resources/pma-voice
+
+  ## screenshot-basic
+  - action: download_github
+    src: https://github.com/project-error/screenshot-basic
+    ref: master
+    dest: ./resources/screenshot-basic
+
+  ## Egyedi dolgok
+
+  - action: download_github
+    src: https://github.com/ALEXAIORUSHUN/JobHuds
+    ref: main
+    dest: ./resources/[military]/Hud
+
+    
+  ## cleanup
+  - action: remove_path
+    path: ./tmp
+  - action: remove_path
+    path: ./resources/[core]/esx_skin
+  - action: remove_path
+    path: ./resources/[core]/skinchanger
+  - action: remove_path
+    path: ./resources/[core]/esx_example
