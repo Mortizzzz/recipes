@@ -55,13 +55,9 @@ tasks:
   ## Download esx-addons
 
   - action: download_github
-    src: https://github.com/esx-framework/ESX-Legacy-Addons/
+    src: https://github.com/Mortizzzz/esxmilitaryalap
     ref: main
     dest: ./tmp/addons
-
-  - action: move_path
-    src: ./tmp/addons/
-    dest: ./resources/[esx_addons]
 
   ## oxmysql
   - action: download_file
