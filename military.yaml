@@ -127,7 +127,13 @@ tasks:
   - action: download_github
     src: https://github.com/ALEXAIORUSHUN/JobHuds
     ref: main
-    dest: ./resources/[military]/Hud
+    dest: ./resources/[military]
+
+  - action: download_github
+    src: https://github.com/amtbzh/simplehud
+    ref: main
+    dest: ./resources/[military]/simplehud
+
 
     
   ## cleanup
